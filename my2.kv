@@ -1,0 +1,258 @@
+WindowManager:
+    Principal:
+    Elemental:
+
+<Principal>:
+    
+    GridLayout:
+        cols: 2
+
+
+        GridLayout:
+            cols: 1
+            #size: root.width-200, root.height-200
+            #pos: 100, 100
+
+            GridLayout:
+                rows: 3
+                cols: 4
+                padding: 10
+                spacing: 10
+                size_hint: [1, .5]                
+                
+                Label:
+                    text: "z1 = "
+                TextInput:
+                    id: r1
+                    multiline: False
+                Label:
+                    text:"+i"
+                TextInput:
+                    id: im1
+                    multiline: False                    
+                
+                Label:
+                    text: "z2 = "
+                TextInput:
+                    id: r2
+                    multiline: False                    
+                Label:
+                    text:"+i"
+                TextInput:
+                    id: im2
+                    multiline: False                    
+
+                Label:
+                    text: "n = "
+                TextInput:
+                    id: n
+                    multiline: False                    
+                
+                Button:
+                    text: "Graficar"
+                    on_release: root.graficar()
+
+                Button:
+                    text: "Calcular"
+                    on_release: root.calcular()
+
+            Label:
+                text: "Operaciones basicas"
+                size_hint: [1, .2]
+
+            GridLayout:
+                cols: 8
+                size_hint: [1, .5]                
+
+                Label:
+                    text: "Suma"
+                CheckBox:
+                    id: suma
+
+                Label:
+                    text: "Resta"
+                CheckBox:
+                    id: resta
+
+                Label:
+                    text: "Producto"
+                CheckBox:
+                    id: producto
+
+                Label:
+                    text: "Division"
+                CheckBox:  
+                    id: division 
+
+                Label:
+                    text: "Potencia"
+                CheckBox:
+                    id: potencia
+
+                Label:
+                    text: "Raices"
+                CheckBox:
+                    id: raices
+
+                Label:
+                    text: "Conjugado"
+                CheckBox:
+                    id: conjugado
+
+                Label:
+                    text: "Distancia"
+                CheckBox:
+                    id: distancia
+
+            Label:
+                text: "Funciones"
+                size_hint: [1, .2]                
+
+            GridLayout:
+                cols: 6
+
+                Label:
+                    text: "e^z"
+                CheckBox:
+                    id: exponencial
+
+                Label:
+                    text: "Ln(z)"
+                CheckBox:
+                    id: logaritmo
+
+                Label:
+                    text: "z1^z2"
+                CheckBox:
+                    id: potCompleja
+
+                Label:
+                    text: "sen(z)"
+                CheckBox:
+                    id: sen
+
+                Label:
+                    text: "cos(z)"
+                CheckBox:
+                    id: cos
+
+                Label:
+                    text: "tan(z)"
+                CheckBox:
+                    id: tan 
+
+                Label:
+                    text: "csc(z)"
+                CheckBox:
+                    id: csc
+
+                Label:
+                    text: "sec(z)"
+                CheckBox:
+                    id: sec
+
+                Label:
+                    text: "cot(z)"
+                CheckBox:
+                    id: cot 
+
+                Label:
+                    text: "arcsen(z)"
+                CheckBox:
+                    id: asen
+
+                Label:
+                    text: "arccos(z)"
+                CheckBox:
+                    id: acos
+
+                Label:
+                    text: "arctan(z)"
+                CheckBox:
+                    id: atan
+
+                Label:
+                    text: "arccsc(z)"
+                CheckBox:
+                    id: acsc
+
+                Label:
+                    text: "arcsec(z)"
+                CheckBox:
+                    id: asec
+
+                Label:
+                    text: "arccot(z)"
+                CheckBox:
+                    id: acot               
+
+                Label:
+                    text: "senh(z)"
+                CheckBox:
+                    id: senh
+
+                Label:
+                    text: "cosh(z)"
+                CheckBox:
+                    id: cosh
+
+                Label:
+                    text: "tanh(z)"
+                CheckBox:  
+                    id: tanh  
+
+                Label:
+                    text: "csch(z)"
+                CheckBox:
+                    id: csch
+
+                Label:
+                    text: "sech(z)"
+                CheckBox:
+                    id: sech
+
+                Label:
+                    text: "coth(z)"
+                CheckBox:   
+                    id: coth 
+
+                Label:
+                    text: "arcsenh(z)"
+                CheckBox:
+                    id: asenh
+
+                Label:
+                    text: "arccosh(z)"
+                CheckBox:
+                    id: acosh
+
+                Label:
+                    text: "arctanh(z)"
+                CheckBox:     
+                    id: atanh           
+
+                Label:
+                    text: "arccsch(z)"
+                CheckBox:
+                    id: acsch
+
+                Label:
+                    text: "arcsech(z)"
+                CheckBox:
+                    id: asech
+
+                Label:
+                    text: "arccoth(z)"
+                CheckBox:   
+                    id: acoth                                       
+
+        GridLayout:
+            rows: 2
+            size_hint: [.8, 1]            
+
+            Label:
+                text: "Resultados"
+                size_hint: [1, .1]                
+            TextInput:
+                id: resultados
+
