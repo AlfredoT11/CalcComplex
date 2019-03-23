@@ -455,6 +455,68 @@ class Complejo:
         zarccoth.y = aux.y
         return zarccoth
 
+    #Derivadas
+    @staticmethod
+    def derz2mas2z(z, n):
+        derz2mas2z = Complejo(nombre="DerivadaZcuadmas2z", color="#3D288A")
+        aux = Complejo()
+
+        if n == 1:
+            aux = Complejo.producto(Complejo(2,0), z)
+            aux = Complejo.suma(aux, Complejo(2,0))
+        elif n == 2:
+            aux.x = 2
+            aux.y = 0
+
+        derz2mas2z.x = aux.x
+        derz2mas2z.y = aux.y
+        return derz2mas2z
+
+    @staticmethod
+    def derZ(z, n):
+        derZ = Complejo(nombre="DerZ", color="#6B38CC")
+        if n == 1:
+            derZ.x = 1
+        
+        return derZ
+
+    @staticmethod
+    def der3i(n):
+        return Complejo(nombre="Der3i", color="#B28654")
+
+    @staticmethod
+    def senhDer(z, n):
+        zDerSenh = Complejo(nombre="DerivadaSenH", color="#8A287A")
+        aux = Complejo(0, 0)
+
+        if n%2 == 0:
+            aux = Complejo.sinh(z)
+        else:
+            aux = Complejo.cosh(z)
+
+        zDerSenh.x = aux.x
+        zDerSenh.y = aux.y
+        return zDerSenh
+
+    @staticmethod
+    def cosDer(z, n):
+        zDerCos = Complejo(nombre="DerivadaSenH", color="#459C97")
+        aux = Complejo()
+
+        if n%4 == 0:
+            aux = Complejo.cos(z)
+        elif n%4 == 1:
+            aux = Complejo.producto(Complejo(-1,0), Complejo.sin(z))
+        elif n%4 == 2:
+            aux = Complejo.producto(Complejo(-1,0), Complejo.cos(z))
+        elif n%4 == 3:
+            aux = Complejo.sin(z)
+
+        zDerCos.x = aux.x
+        zDerCos.y = aux.y
+        return zDerCos
+    
+
     def toString(self):
         if(self.y<0):
             print(self.nombre,' = {0}{1}i'.format(self.x, self.y))
