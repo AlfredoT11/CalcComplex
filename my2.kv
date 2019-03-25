@@ -1,8 +1,9 @@
 WindowManager:
     Principal:
-    Elemental:
+    TICGeneralizado:
 
 <Principal>:
+    name: "Funciones"
     
     GridLayout:
         cols: 2
@@ -247,7 +248,7 @@ WindowManager:
                     id: acoth                                       
 
         GridLayout:
-            rows: 2
+            rows: 3
             size_hint: [.8, 1]            
 
             Label:
@@ -255,4 +256,81 @@ WindowManager:
                 size_hint: [1, .1]                
             TextInput:
                 id: resultados
+            Button:
+                text: "Teorema integral de Cauchy generalizado"
+                size_hint: [1, .1]
+                on_release:
+                    app.root.current = "TICGeneralizado"
+                    root.manager.transition.direction = "left"                
+
+<TICGeneralizado>:
+    name: "TICGeneralizado"
+
+    GridLayout:
+        rows: 4
+
+        GridLayout:
+            size_hint: [1, .24]
+            cols: 4
+
+            Label:
+                text: "r = "
+            TextInput:
+                id: r
+                multiline: False
+            Label:
+                text:"n = "
+            TextInput:
+                id: n
+                multiline: False  
+
+            Label:
+                text: "z0 = "
+            TextInput:
+                id: r0
+                multiline: False
+            Label:
+                text:"+i"
+            TextInput:
+                id: im0
+                multiline: False
+
+            Label: 
+                text: "f(z) = "
+            
+            Spinner:
+                id: funcion
+                text: "z^2 + 2z"
+                values: ["z^2 + 2z", "e^z", "senh(z)", "cos(z)", "z", "z^n + i", "3i", "z^i"]
+                #background_color: color_button if self.state == 'normal' else color_button_pressed
+                #background_down: 'atlas://data/images/defaulttheme/spinner'
+                #color: color_font
+                #option_cls: Factory.get("MySpinnerOption")
+                #size_hint: None, None
+            
+            Button:
+                text: 'Calcular'
+                on_release: root.calcular()
+            Button:
+                text: 'Graficar'
+                on_release: root.graficar()
+    
+        GridLayout:
+            size_hint: [1, .15]
+            cols: 2
+
+            Label:
+                text: 'Resultado = '
+
+            TextInput:
+                id: TICGResultado
+        
+        Button:
+            size_hint: [1, .1]
+            text: 'Funciones'
+            on_release:
+                app.root.current = "Funciones"
+                root.manager.transition.direction = "right"             
+        Label:
+            text: ' '
 

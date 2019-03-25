@@ -220,15 +220,74 @@ class Principal(Screen):
 
     def graficar(self):
 
-
-
         '''plt.plot([10000], [10000])
         plt.plot([-10000], [10000])
         plt.plot([-10000], [-10000])
         plt.plot([10000], [-10000])'''
         plt.show()             
 
-class Elemental(Screen):
+class TICGeneralizado(Screen):
+    def calcular(self):
+
+        opcion = self.ids.funcion.text
+
+        if self.ids.r.text != "":
+            r = float(self.ids.r.text)
+        else:
+            r = 0.0
+
+        if self.ids.n.text != "":
+            n = int(self.ids.n.text)
+        else:
+            n = 1
+
+        if self.ids.r0.text != "":
+            r0 = float(self.ids.r0.text)
+        else:
+            r0 = 0.000000000000000001
+
+        if self.ids.im0.text != "":
+            im0 = float(self.ids.im0.text)
+        else:
+            im0 = 1 
+
+        if opcion == "z^2 + 2z":
+            opcion = 1
+        elif opcion == "e^z":
+            opcion = 2
+        elif opcion == "senh(z)":
+            opcion = 3
+        elif opcion == "cos(z)":
+            opcion = 4
+        elif opcion == "z":
+            opcion = 5
+        elif opcion == "z^n + i":
+            opcion = 6
+        elif opcion == "3i":
+            opcion = 7
+        elif opcion == "z^i":
+            opcion = 8
+
+        resultado = Complejo.TICGeneralizado(r, Complejo(r0, im0), n-1, opcion)
+
+        Complejo.circunferenciaPunto(0, 0, r, Complejo(r0, im0))
+
+        print(resultado.toString())
+        self.ids.TICGResultado.text = ""
+        self.ids.TICGResultado.text += resultado.toString()
+
+        plt.grid(True)
+        plt.axis('equal')
+        plt.axis([-50, 50, -50, 50])          
+
+    def graficar(self):
+
+        '''plt.plot([10000], [10000])
+        plt.plot([-10000], [10000])
+        plt.plot([-10000], [-10000])
+        plt.plot([10000], [-10000])'''
+        plt.show()  
+
     pass
 
 class WindowManager(ScreenManager):

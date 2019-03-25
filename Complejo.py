@@ -13,6 +13,8 @@ class Complejo:
         self.marker = marker
         self.markersize = markersize
 
+
+    #Funciones básicas ------------------------------------------------------------------------------------------------
     @staticmethod
     def modulo(z1):
         modulo = (z1.x**2 + z1.y**2)**(1/2)
@@ -127,6 +129,8 @@ class Complejo:
 
 
         return "Distancia: "+str(d)+"\n"
+
+    # Funciones básicas ---------------------------------------------------------------------------------------------
     @staticmethod
     def expo(z1):
         zexpo = Complejo(nombre="Exponencial", color="blue")
@@ -149,7 +153,7 @@ class Complejo:
 
         zfin = zaux1**zaux2
         zpotC.x = zfin.real
-        zpotC.y = zfin.imag   
+        zpotC.y = zfin.imag
 
         return zpotC
 
@@ -455,7 +459,7 @@ class Complejo:
         zarccoth.y = aux.y
         return zarccoth
 
-    #Derivadas
+    #Derivadas -------------------------------------------------------------------------------------------------
     @staticmethod
     def derz2mas2z(z, n):
         derz2mas2z = Complejo(nombre="DerivadaZcuadmas2z", color="#3D288A")
@@ -473,19 +477,7 @@ class Complejo:
         return derz2mas2z
 
     @staticmethod
-    def derZ(z, n):
-        derZ = Complejo(nombre="DerZ", color="#6B38CC")
-        if n == 1:
-            derZ.x = 1
-        
-        return derZ
-
-    @staticmethod
-    def der3i(n):
-        return Complejo(nombre="Der3i", color="#B28654")
-
-    @staticmethod
-    def senhDer(z, n):
+    def derSenh(z, n):
         zDerSenh = Complejo(nombre="DerivadaSenH", color="#8A287A")
         aux = Complejo(0, 0)
 
@@ -499,7 +491,7 @@ class Complejo:
         return zDerSenh
 
     @staticmethod
-    def cosDer(z, n):
+    def derCos(z, n):
         zDerCos = Complejo(nombre="DerivadaSenH", color="#459C97")
         aux = Complejo()
 
@@ -514,8 +506,101 @@ class Complejo:
 
         zDerCos.x = aux.x
         zDerCos.y = aux.y
-        return zDerCos
+        return zDerCos        
+
+    @staticmethod
+    def derZ(z, n):
+        derZ = Complejo(nombre="DerZ", color="#6B38CC")
+        if n == 1:
+            derZ.x = 1
+        
+        return derZ
+
+    @staticmethod
+    def derZnmasi(z, n):
+        
+        print("n=",n)
+        derZnmasi = Complejo(nombre="DerZ^n", color="#1D629C")
+        fact = 1
+
+        #factorial
+        for i in range(1, n+2):
+            fact = fact*i
+        
+        print("fact=", fact)
+        derZnmasi.x = fact
+        derZnmasi.y = 0
+        derZnmasi = Complejo.producto(z, derZnmasi)
+
+        return derZnmasi
+        
+
+    @staticmethod
+    def derZi(z, n):
+        print("Quesitos. n = ",n)
+        aux = Complejo(1, 0)
+        auxPot = Complejo()
+        for i in range(0, n):
+            aux = Complejo.producto(aux, Complejo(-1*i, 1))
+            print("-",i," +i")
+        print("General = -",n," + i")
+        print("Aux = ", aux.toString())
+
+        auxPot = Complejo.potenciaCompleja(z, Complejo(-1*n, 1))
+        print("Evaluada = ", auxPot.toString())
+
+        derZi = Complejo.producto(aux, auxPot)
+        return derZi
+
+
+
+# Teoremas y formulas ----------------------------------------------------------------------------------------------
+
+    @staticmethod
+    def TICGeneralizado(r, z0, n, opcion):
+        if Complejo.modulo(z0) < r:
+            fz0 = Complejo()
+            
+            fact = 1
+            #factorial
+            for i in range(1, n+1):
+                fact = fact*i            
+
+            zaux = Complejo(0, 2*pi/fact)
+            
+
+            if opcion == 1:
+                fz0 = Complejo.derz2mas2z(z0, n) #z^2 + 2z
+            elif opcion == 2:
+                fz0 = Complejo.expo(z0) # e^z
+            elif opcion == 3:
+                fz0 = Complejo.derSenh(z0, n)
+            elif opcion == 4:
+                fz0 = Complejo.derCos(z0, n)
+            elif opcion == 5:
+                fz0 = Complejo.derZ(z0, n)
+            elif opcion == 6:
+                fz0 = Complejo.derZnmasi(z0, n)
+            elif opcion == 7:
+                if n == 0:
+                    fz0 = Complejo(0, 3)
+                else:
+                    fz0 = Complejo(0, 0)
+            elif opcion == 8:
+                print("Quesitos1")
+                fz0 = Complejo.derZi(z0, n)
+
+            fz0 = Complejo.producto(fz0, zaux)
+            fz0.nombre="Valor integral"
+            #print(fz0.toString())
+            return fz0
+
+        else:
+            print("Imposible de calcular, z0 está fuera de la circunferencia.")
+            return Complejo(0, 0)
     
+
+# Utilidades -------------------------------------------------------------------------------------------------------
 
     def toString(self):
         if(self.y<0):
@@ -527,3 +612,20 @@ class Complejo:
 
     def graficar(self):
         plt.plot([self.x], [self.y], marker=self.marker, markersize=self.markersize, color=self.color)
+
+    @staticmethod
+    def circunferenciaPunto(x, y, r, z):
+        """ 
+        Dibuja una circulo de radio r centrado en (x,y). Además dibuja un número complejo z.
+        """
+        
+        if Complejo.modulo(z) < r:
+            print("Dentro. :D")
+        else:
+            print("Fuera. :c")
+
+        z.graficar()
+        
+        circum = plt.Circle((x, y), r, facecolor="#8A2C28", edgecolor="#1D629C")
+        ax = plt.gca()
+        ax.add_artist(circum)
