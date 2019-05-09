@@ -91,11 +91,12 @@ class Complejo:
     @staticmethod
     def raiz(z, n):
         raices = []
+        theta = Complejo.argumento(z)
 
         r = (z.x**2 + z.y**2)**(1/2)
         rn = r**(1/n)
 
-        if z.x > 0 and z.y == 0:
+        '''if z.x > 0 and z.y == 0:
             theta = 0
         elif z.x == 0 and z.y > 0:
             theta = pi / 2
@@ -110,7 +111,7 @@ class Complejo:
         elif z.x < 0 and z.y < 0:
             theta = pi + atan(abs(z.y)/abs(z.x))
         elif z.x > 0 and z.y < 0:
-            theta = 2*pi - atan(abs(z.y)/z.x)
+            theta = 2*pi - atan(abs(z.y)/z.x)'''
 
         for i in range(0, n):
             zx = rn * cos((theta + 2*pi*i) / n)
@@ -570,7 +571,11 @@ class Complejo:
             
 
             if opcion == 1:
-                fz0 = Complejo.derz2mas2z(z0, n) #z^2 + 2z
+                if (n == 0):
+                    fz0 = Complejo.potencia(z0, 2)
+                    fz0 = Complejo.suma(fz0, Complejo.producto(z0, Complejo(2, 0)))
+                else:
+                    fz0 = Complejo.derz2mas2z(z0, n) #z^2 + 2z
             elif opcion == 2:
                 fz0 = Complejo.expo(z0) # e^z
             elif opcion == 3:
@@ -578,9 +583,16 @@ class Complejo:
             elif opcion == 4:
                 fz0 = Complejo.derCos(z0, n)
             elif opcion == 5:
-                fz0 = Complejo.derZ(z0, n)
+                if n == 0:
+                    fz0 = z0
+                else:
+                    fz0 = Complejo.derZ(z0, n)
             elif opcion == 6:
-                fz0 = Complejo.derZnmasi(z0, n)
+                if n == 0:
+                    fz0 = Complejo.potencia(z0, n)
+                    fz0 = Complejo.suma(fz0, Complejo(0,1))
+                else:
+                    fz0 = Complejo.derZnmasi(z0, n)
             elif opcion == 7:
                 if n == 0:
                     fz0 = Complejo(0, 3)

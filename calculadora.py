@@ -229,6 +229,7 @@ class Principal(Screen):
 class TICGeneralizado(Screen):
     def calcular(self):
 
+
         opcion = self.ids.funcion.text
 
         if self.ids.r.text != "":
@@ -249,36 +250,42 @@ class TICGeneralizado(Screen):
         if self.ids.im0.text != "":
             im0 = float(self.ids.im0.text)
         else:
-            im0 = 1 
+            im0 = 1
 
-        if opcion == "z^2 + 2z":
-            opcion = 1
-        elif opcion == "e^z":
-            opcion = 2
-        elif opcion == "senh(z)":
-            opcion = 3
-        elif opcion == "cos(z)":
-            opcion = 4
-        elif opcion == "z":
-            opcion = 5
-        elif opcion == "z^n + i":
-            opcion = 6
-        elif opcion == "3i":
-            opcion = 7
-        elif opcion == "z^i":
-            opcion = 8
+        if Complejo.modulo(Complejo(r0, im0)) < r: 
 
-        resultado = Complejo.TICGeneralizado(r, Complejo(r0, im0), n-1, opcion)
+            if opcion == "z^2 + 2z":
+                opcion = 1
+            elif opcion == "e^z":
+                opcion = 2
+            elif opcion == "senh(z)":
+                opcion = 3
+            elif opcion == "cos(z)":
+                opcion = 4
+            elif opcion == "z":
+                opcion = 5
+            elif opcion == "z^n + i":
+                opcion = 6
+            elif opcion == "3i":
+                opcion = 7
+            elif opcion == "z^i":
+                opcion = 8
 
-        Complejo.circunferenciaPunto(0, 0, r, Complejo(r0, im0))
+            resultado = Complejo.TICGeneralizado(r, Complejo(r0, im0), n-1, opcion)
 
-        print(resultado.toString())
-        self.ids.TICGResultado.text = ""
-        self.ids.TICGResultado.text += resultado.toString()
+            Complejo.circunferenciaPunto(0, 0, r, Complejo(r0, im0))
 
-        plt.grid(True)
-        plt.axis('equal')
-        plt.axis([-50, 50, -50, 50])          
+            print(resultado.toString())
+            self.ids.TICGResultado.text = ""
+            self.ids.TICGResultado.text += resultado.toString()
+
+            plt.grid(True)
+            plt.axis('equal')
+            plt.axis([-50, 50, -50, 50])
+
+        else:
+            self.ids.TICGResultado.text = ""
+            self.ids.TICGResultado.text += "z0 no se encuentra en gamma"                  
 
     def graficar(self):
 
